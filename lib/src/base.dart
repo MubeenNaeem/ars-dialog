@@ -58,7 +58,7 @@ class ArsDialog extends StatelessWidget {
                     ),
                     style: style.titleTextStyle ??
                         dialogTheme.titleTextStyle ??
-                        theme.textTheme.headline6!,
+                        theme.textTheme.bodySmall!,
                   ),
                 )
               : Container(),
@@ -72,7 +72,7 @@ class ArsDialog extends StatelessWidget {
                       child: Semantics(child: content),
                       style: style.contentTextStyle ??
                           dialogTheme.contentTextStyle ??
-                          theme.textTheme.subtitle1!,
+                          theme.textTheme.bodySmall!,
                     ),
                   ),
                 )
@@ -355,13 +355,12 @@ class DialogBackground extends StatelessWidget {
     return Material(
       type: MaterialType.canvas,
       color: Colors.transparent,
-      child: WillPopScope(
-        onWillPop: () async {
+      child: PopScope(
+        onPopInvoked: (pop) {
           if (dismissable ?? true) {
             if (onDismiss != null) onDismiss!();
             Navigator.pop(context);
           }
-          return false;
         },
         child: Stack(
           clipBehavior: Clip.antiAlias,
